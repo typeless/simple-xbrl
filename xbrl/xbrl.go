@@ -13,13 +13,25 @@ type XBRL struct {
 	Facts    []Fact    `xml:",any"`
 }
 
+type Dimension struct {
+	XMLName xml.Name
+	Domain  string `xml:"dimension,attr"`
+	Value   string `xml:",chardata"`
+}
+
+type Scenario struct {
+	XMLName   xml.Name
+	Dimension Dimension `xml:"explicitMember"`
+}
+
 // Context represents <ixbrl:context> tag
 type Context struct {
-	XMLName xml.Name
-	ID      string `xml:"id,attr"`
-	Instant Date   `xml:"period>instant"`
-	Start   Date   `xml:"period>startDate"`
-	End     Date   `xml:"period>endDate"`
+	XMLName  xml.Name
+	ID       string   `xml:"id,attr"`
+	Instant  Date     `xml:"period>instant"`
+	Start    Date     `xml:"period>startDate"`
+	End      Date     `xml:"eriod>endDate"`
+	Scenario Scenario `xml:"scenario"`
 }
 
 // Fact represents each fact
